@@ -1,0 +1,747 @@
+
+:root{
+  --bg:#071018; --panel:#0e1116; --muted:#9aa0a6;
+  --accent:#7b4cff; --accent-dark:#5f3fd6; --container:1200px;
+  font-family:Inter,system-ui,Segoe UI,Roboto,Arial;
+}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:#e9eef6;display:flex;min-height:100vh}
+.sidebar{width:260px;background:linear-gradient(180deg,var(--panel),#07080b);padding:28px;position:fixed;left:0;top:0;bottom:0;border-right:1px solid rgba(255,255,255,0.03);display:flex;flex-direction:column;gap:18px}
+.logo{font-weight:900;color:var(--accent);font-size:20px;text-align:center}
+.side-nav{display:flex;flex-direction:column;gap:8px;margin-top:6px}
+.side-nav a{padding:10px 12px;border-radius:8px;color:rgba(255,255,255,0.85);text-decoration:none;font-weight:600;display:block}
+.side-nav a.active, .side-nav a:hover{background:linear-gradient(90deg,rgba(123,76,255,0.08),rgba(75,123,255,0.05));color:#fff;box-shadow:0 6px 24px rgba(123,76,255,0.04)}
+.search-box input{background:#0a0a0f;border:1px solid rgba(255,255,255,0.03);padding:8px;border-radius:8px;color:#fff;width:100%}
+.auth-buttons{display:flex;gap:8px;margin-top:auto;flex-direction:column}
+.btn{background:linear-gradient(90deg,var(--accent),var(--accent-dark));border:0;padding:10px;border-radius:8px;color:#fff;font-weight:700;cursor:pointer}
+.btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
+
+/* Content area */
+.content{margin-left:300px;padding:28px;flex:1;max-width:calc(100% - 300px);}
+.container{max-width:var(--container);margin:0 auto}
+
+/* Hero */
+.hero{display:flex;gap:20px;align-items:flex-start;margin-bottom:30px}
+.hero-main{flex:2;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);border-radius:12px;padding:12px;overflow:hidden}
+.hero-main img{width:100%;height:420px;object-fit:cover;border-radius:8px}
+.hero-side{width:360px;display:flex;flex-direction:column;gap:12px}
+
+/* grids */
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:18px}
+.card{background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);padding:12px;border-radius:10px;overflow:hidden}
+.card img{width:100%;height:240px;object-fit:cover;border-radius:10px}
+.title{font-size:20px;margin:6px 0 2px;color:#fff}
+
+/* article page */
+.article-hero{height:420px;background-size:cover;background-position:center;border-radius:10px;margin-bottom:18px}
+
+/* responsive */
+@media(max-width:1000px){.grid-4{grid-template-columns:repeat(2,1fr)}.hero{flex-direction:column}.hero-side{width:100%}.content{margin-left:0;padding:18px} .sidebar{position:relative;width:100%;height:auto;flex-direction:row;align-items:center;padding:12px}}
+
+body {
+  font-size: 18px;
+  line-height: 1.7;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh; /* тело страницы тянется на всю высоту окна */
+  margin: 0;
+}
+
+.content {
+  margin-left: 260px; /* подстраиваем под ширину сайдбара */
+  padding: 0 32px; /* убираем лишний внутренний отступ слева */
+  flex: 1;
+  max-width: calc(100% - 260px);
+}
+
+
+.site-footer {
+  width: 100%;
+  background: transparent; /* без фона */
+  color: var(--muted); /* мягкий цвет текста */
+  padding: 20px 0;
+  text-align: center;
+  margin-top: auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.05); /* лёгкая линия для отделения */
+}
+
+.site-footer .container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.footer-links a {
+  color: var(--muted);
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.footer-links a:hover {
+  color: var(--accent);
+  text-shadow: 0 0 8px rgba(123, 76, 255, 0.4);
+}
+
+/* Только для страницы Videos */
+body.videos-page .grid-4 {
+  grid-template-columns: repeat(2, 1fr); /* вместо 4 карточек в ряд — 3, чтобы стали шире */
+}
+
+body.videos-page .card img {
+  height: 340px;           /* немного выше */
+  width: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+}
+
+/* при наведении слегка увеличиваем всю карточку */
+body.videos-page .card:hover {
+  transform: scale(1.05);
+}
+
+
+/* Только для страницы Podcasts */
+body.podcasts-page .grid-4 {
+  grid-template-columns: repeat(2, 1fr); /* вместо 4 карточек в ряд — 2, чтобы стали шире */
+}
+
+body.podcasts-page .card img {
+  height: 340px;           /* немного выше */
+  width: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+}
+
+/* при наведении слегка увеличиваем всю карточку */
+body.podcasts-page .card:hover {
+  transform: scale(1.05);
+}
+
+
+
+.about-section {
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), transparent);
+  padding: 24px;
+  border-radius: 12px;
+  color: #ddd;
+  line-height: 1.7;
+}
+
+.about-section h2, 
+.about-section h3 {
+  color: #fff;
+  margin-top: 18px;
+  margin-bottom: 8px;
+}
+
+.about-section ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.about-section li {
+  margin: 6px 0;
+}
+
+.about-section blockquote {
+  border-left: 3px solid var(--accent);
+  padding-left: 12px;
+  font-style: italic;
+  color: #ccc;
+  margin: 16px 0;
+}
+
+.about-section a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.about-section a:hover {
+  text-decoration: underline;
+  color: #fff;
+}
+
+
+
+/* Стили для ссылок в подвале */
+.site-footer a {
+  color: #ccc;             /* обычный цвет ссылок */
+  text-decoration: none;   /* убираем подчёркивание */
+}
+
+.site-footer a:hover {
+  color: #7b4cff;              /* подсветка при наведении */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.site-logo-top img {
+  height: 85px;           /* размер логотипа */
+  width: auto;
+  object-fit: contain;
+  transition: transform 0.2s ease;
+}
+
+.site-logo-top img:hover {
+  transform: scale(1.05); /* лёгкое увеличение при наведении */
+  cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+h2, h3 {
+  color: #ffffff;
+  letter-spacing: 0.5px;
+}
+p {
+  color: #c5c9d0;
+  line-height: 1.5;
+  margin-bottom: 14px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ======================================================
+   🎮 GAMEZONE — Верхние большие карточки (Hero)
+   ====================================================== */
+
+body.home-page .hero {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+  padding-left: 40;  /* убираем смещение влево */
+  padding-right: 32px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Карточка */
+body.home-page .hero article {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #0e1116;
+  aspect-ratio: 9 / 16; /* вертикальные, как на IGN */
+  transition: transform 0.3s ease;
+}
+
+body.home-page .hero article:hover {
+  transform: scale(1.03);
+}
+
+/* Картинка */
+body.home-page .hero article img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;        /* не искажает */
+  object-position: center;  /* центрирует */
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+body.home-page .hero article:hover img {
+  transform: scale(1.05);
+}
+
+/* Текст под картинкой */
+body.home-page .hero article h2 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 10px 12px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.65) 100%);
+  border-radius: 0 0 10px 10px;
+  box-sizing: border-box;
+}
+
+/* 📱 Адаптив */
+@media (max-width: 900px) {
+  body.home-page .hero {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  body.home-page .hero {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ======================================================
+   🎮 GAMEZONE — Нижние блоки (Актуальное, Новости, Рекомендации)
+   ====================================================== */
+
+/* Сетка */
+body.home-page .grid-4 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  padding-left: 0;  /* убираем смещение влево */
+  padding-right: 32px;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+/* Карточка */
+body.home-page .grid-4 article {
+  display: flex;
+  flex-direction: column;
+  background: transparent; /* без фона, как на IGN */
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+body.home-page .grid-4 article:hover {
+  transform: scale(1.02);
+}
+
+/* Картинка (уменьшенная, адаптивная) */
+body.home-page .grid-4 article img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 6px;
+  transition: transform 0.3s ease;
+  margin-bottom: 6px; /* 🔥 создаёт ровный отступ под картинкой */
+
+}
+body.home-page .grid-4 article:hover img {
+  transform: scale(1.04);
+}
+
+/* Заголовок и описание */
+body.home-page .grid-4 article h3 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin: 2px 0 4px;
+  color: #fff;
+  line-height: 1.3;
+}
+
+body.home-page .grid-4 article p {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin: 0;
+  line-height: 1.4;
+}
+
+
+/* Новости (список) */
+body.home-page .news-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-left: 0;  /* убираем смещение влево */
+  padding-right: 32px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+body.home-page .news-list article {
+  display: flex;
+  gap: 12px;
+  background: var(--panel);
+  border-radius: 10px;
+  padding: 8px;
+  transition: 0.3s;
+}
+body.home-page .news-list article:hover {
+  transform: scale(1.02);
+}
+body.home-page .news-list img {
+  width: 320px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+body.home-page .news-list h3 {
+  color: #fff;
+  font-size: 0.9rem;
+  margin-bottom: 4px;
+}
+body.home-page .news-list p {
+  color: var(--muted);
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+/* 📱 Адаптив */
+@media (max-width: 900px) {
+  body.home-page .grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  body.home-page .news-list img {
+    width: 120px;
+    height: 70px;
+  }
+}
+@media (max-width: 600px) {
+  body.home-page .grid-4 {
+    grid-template-columns: 1fr;
+  }
+  body.home-page .news-list img {
+    width: 100px;
+    height: 60px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ======================================================
+   📏 Выровнять контент по левой линии (как на IGN)
+   ====================================================== */
+
+body.home-page .content,
+body .content {
+  margin-left: 260px !important;   /* ровно под сайдбар */
+  padding-left: 60px !important;   /* выравнивание картинок и текста */
+  padding-right: 32px;
+  max-width: calc(100% - 260px);
+  box-sizing: border-box;
+}
+
+/* Убираем внутренние отступы у секций (чтобы всё стояло вровень) */
+body.home-page .hero,
+body.home-page .grid-4,
+body.home-page .news-list {
+  padding-left: 300px !important;
+  padding-right: 0 !important;
+  margin-left: 0 !important;
+}
+
+
+
+
+
+
+
+
+
+
+/* ======================================================
+   📏 Финальное выравнивание и отступ контента (работает всегда)
+   ====================================================== */
+
+/* основной контейнер контента */
+/* ======================================================
+   📏 Унифицированное выравнивание для всех страниц
+   ====================================================== */
+
+body.home-page .content,
+body .content {
+  position: relative;
+  margin-left: 260px !important;   /* под ширину сайдбара */
+  padding-left: 40px !important;   /* одинаково с другими страницами */
+  padding-right: 40px !important;
+  padding-top: 40px !important;
+  box-sizing: border-box;
+  max-width: calc(100% - 260px);
+}
+
+
+/* выравнивание внутренних секций */
+body.home-page .hero,
+body.home-page .grid-4,
+body.home-page .news-list {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+/* ======================================================
+   🧱 Индивидуальные отступы между секциями
+   ====================================================== */
+
+/* Отступ между Актуальным и Рекомендациями */
+body.home-page .partners {
+  margin-top: 60px; /* 🔥 расстояние под блоком "Актуальное" */
+}
+
+/* Отступ между Рекомендациями и Новостями */
+body.home-page .recent {
+  margin-top: 60px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ======================================================
+   📏 Футер всегда внизу, даже при малом контенте
+   ====================================================== */
+
+/* Вся страница — flex-контейнер */
+html, body {
+  height: 100%;
+  margin: 0;
+  background: var(--bg);
+}
+
+/* Основной контейнер после боковой панели */
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;        /* тянем до низа окна */
+}
+
+/* Контент заполняет всё пространство между header и footer */
+.content {
+  flex: 1;                  /* 🔥 растягивается */
+  padding: 40px !important;
+  box-sizing: border-box;
+}
+
+/* Подвал всегда прижат к низу */
+.site-footer {
+  color: #9aa0a6;
+  text-align: center;
+  padding: 20px !important;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Контейнер с фиксированным соотношением 843x474 */
+.slider{
+  position:relative;
+  width:min(843px, 100%);
+  aspect-ratio:843 / 474;       /* держим пропорцию */
+  margin:24px auto;
+  overflow:hidden;
+  border-radius:16px;
+  background:#0e1116;
+}
+
+/* Лента слайдов */
+.track{
+  display:flex;
+  height:100%;
+  transition:transform .4s ease;
+}
+
+/* Каждый слайд занимает всю ширину .slider */
+.slide{ flex:0 0 100%; height:100%; }
+.slide img{
+  width:100%; height:100%;
+  object-fit:cover; display:block;
+}
+
+/* Кнопки навигации — стеклянные */
+.nav{
+  position:absolute; top:50%; transform:translateY(-50%);
+  width:44px; height:44px; border:0; border-radius:50%;
+  display:grid; place-items:center; cursor:pointer;
+  color:#fff; background:rgba(0,0,0,.55); backdrop-filter:blur(6px);
+  box-shadow:0 8px 20px rgba(0,0,0,.35);
+  transition:background .2s, transform .12s;
+  z-index:5;        /* поверх картинки */
+}
+.nav:hover{ background:rgba(123,76,255,.85); }
+.nav:active{ transform:translateY(-50%) scale(.96); }
+.prev{ left:16px; } .next{ right:16px; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.footer-social a {
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-social a:hover {
+  color: #7b4cff; /* любой цвет подсветки */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.container ul {
+  color: #ccc; /* тот же цвет, что и у обычного текста */
+  list-style-type: disc; /* или square / circle / none */
+  margin-left: 20px;
+}
+
+
+
+
+
+
+
+.slider {
+  margin-left: 0px;  /* подвинуть влево */
+}
